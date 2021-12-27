@@ -21,13 +21,13 @@ GitHub Action to check links (internal-only or optionally all links) for a Hugo 
 
 ### Purpose
 
-This is a meant to be a pass/fail test which blocks pushing broken internal links, and optionally blocks pushing an update until any broken external link are fixed (external breakage can occur independently of repo changes and is not recommended). A reasonable use case for the external link check is to get notifications when a scheduled run (which you would create) of the action detects problem links.
+This is a meant to be a pass/fail test which blocks pushing broken internal links, and optionally blocks pushing an update until any broken external links are fixed (external breakage can occur independently of repo changes and this is not recommended). A more reasonable use case for the external link check is to get notifications when a scheduled run (which you would create) of the action detects problem links.
 
 ### Inputs
 
 | Input | Req'd | Default | Meaning |
 |-------|-------|---------|---------|
-| canonical-root | yes | _(nil)_ (will fail build unless specified in ``with``) | URLs beginning with this string are considered internal, in addition to site-relative URLs (e.g. beginning with slash ``/``) or page-relative URLs) |
+| canonical-root | yes | _(nil)_ (will fail build unless specified in ``with``) | URLs beginning with this string are considered internal, in addition to site-relative URLs (e.g. beginning with slash ``/``) or page-relative URLs (no scheme or slash)) |
 | check-external | no | n/a | If "true" check all URLs including offsite (external) |
 | check-external-strict | no | n/a | If "true" 301 redirects (only occurs with external checks) result in a fail instead on only warning |
 | download-site-as | yes | unminified-site | Name of artifact from build stage which contains the site (tarball, no compression) |
