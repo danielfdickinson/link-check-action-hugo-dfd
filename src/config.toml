@@ -1,4 +1,18 @@
 baseURL = 'https://www.example.com/'
 languageCode = 'en-ca'
 title = 'Hugo action test site'
-theme = 'github.com/danielfdickinson/hugo-minimal-test'
+theme = 'github.com/danielfdickinson/minimal-test-theme-hugo-dfd'
+copyright = '© 2021 Daniel F. Dickinson'
+
+[taxonomies]
+  tag = "tags"
+
+[author]
+  name = "Daniel F. Dickinson"
+  homepage = "https://www.wildtechgarden.ca/"
+  email = "dfdpublic@wildtechgarden.ca"
+
+  [[ author.authors ]]
+    name = "Daniel F. Dickinson"
+    homepage = "https://www.wildtechgarden.ca/"
+    email = "dfdpublic@wildtechgarden.ca"
