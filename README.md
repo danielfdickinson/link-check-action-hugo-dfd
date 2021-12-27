@@ -35,6 +35,7 @@ This is a meant to be a pass/fail test which blocks pushing broken internal link
 | download-site-as | yes | unminified-site | Name of artifact from build stage which contains the site (tarball, no compression) |
 | download-site-filename | yes | hugo-site.tar | Name of tarball in artifact from build stage which contains the site (no compression) |
 | output-directory | yes | public | Directory (in the artifact, above, containing the site) |
+| skip-check-patterns | yes | a list of relevance to my sites | A space-separated list of patterns for which to skip errors such as sites that dislike automated connections like ours |
 | upload-logs-as | no | _(nil)_ | If present will, on failed links, upload logs of link check results (ok.log, todo.log, error.log) as an artifact with this name |
 | upload-logs-retention | no | _(nil)_ | How many days to retain logs uploaded as an artifact. If not set uses the GitHub default (90 days). |
 

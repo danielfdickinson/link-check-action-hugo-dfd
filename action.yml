@@ -26,6 +26,10 @@ inputs:
     description: "Location of output site"
     required: true
     default: "public"
+  skip-check-patterns:
+    description: "Space-separated list of patterns to skip (from error output)"
+    required: true
+    default: "https://www.facebook.com/sharer.php https://www.linkedin.com/shareArticle  https://linkedin.com/shareArticle https://twitter.com/share https://www.pexels.com https://pixabay.com http://doi.org/ https://doi.org/ https://www.nature.com/ https://arxiv.org/ example.com example.net"
   upload-logs-as:
     description: "Upload logs as an artifact"
     required: false
@@ -58,6 +62,7 @@ runs:
         CHECK_EXTERNAL: ${{ inputs.check-external }}
         CHECK_EXTERNAL_STRICT: ${{ inputs.check-external-strict }}
         OUTPUT_DIRECTORY: ${{ inputs.output-directory }}
+        SKIP_CHECK_PATTERNS: ${{ inputs.skip-check-patterns }}
       run: |
         { rm -f ok.log; \
         rm -f todo.log; \
@@ -73,21 +78,11 @@ runs:
         if test "${CHECK_EXTERNAL}" = "true"; then INTERNAL= ; else INTERNAL="--internal"; fi ; \
         if test "${CHECK_EXTERNAL_STRICT}" = "true"; then TODOS= ; else TODOS="true"; fi ; \
         echo "::group::not ok links"; \
+        SKIPS=""; for skip in ${SKIP_CHECK_PATTERNS}; do SKIPS="${SKIPS}${SKIPS:+ }--skip \"${skip}\""; done ; \
         npx hyperlink ${OUTPUT_DIRECTORY}/sitemap.xml \
         --canonicalroot ${CANONICAL_ROOT} \
         ${INTERNAL} \
-        --skip "https://www.facebook.com/sharer.php" \
-        --skip "https://www.linkedin.com/shareArticle" \
-        --skip "https://linkedin.com/shareArticle" \
-        --skip "https://twitter.com/share" \
-        --skip "https://www.pexels.com" \
-        --skip "https://pixabay.com" \
-        --skip "http://doi.org/" \
-        --skip "https://doi.org/" \
-        --skip "https://www.nature.com/" \
-        --skip "https://arxiv.org/" \
-        --skip "example.com" \
-        --skip "example.net" \
+        ${SKIPS} \
         ${TODOS:+--todo "301 http" --todo "fragment-redirect"} \
         -r -p ${OUTPUT_DIRECTORY}/sitemap.xml | tee full-output | tee ok-links | tee todo-links | { grep -Ev "(^\#|^ *ok |^1\.\.|^TAP version|^\s*$)" || true; } | tee error.log ; \
         echo "::endgroup::not ok links"; \
