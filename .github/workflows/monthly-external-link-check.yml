@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/hugo-action-build-audit@v0.1.1
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Run hugo-action-check-links
+      - name: Run DFD Hugo Check Links
         uses: ./
         with:
           canonical-root: https://www.example.com/

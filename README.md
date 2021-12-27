@@ -1,21 +1,19 @@
-# hugo-action-check-links
+# DFD Hugo Check Links GitHub Action
 GitHub Action to check links (internal-only or optionally all links) for a Hugo site
 
 ## Status
 
-### Main & Pull Requests
+### Main
 
-![test-build-validate](https://github.com/danielfdickinson/hugo-action-check-links/actions/workflows/test-check-links.yml/badge.svg) ![test-build-validate PR](https://github.com/danielfdickinson/hugo-action-check-links/actions/workflows/test-check-links.yml/badge.svg?on=pull_request)
-
+![test check-links](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml/badge.svg)
 
 ### Scheduled
 
-![weekly external link check](https://github.com/danielfdickinson/hugo-action-check-links/actions/workflows/weekly-external-link-check.yml/badge.svg?on=schedule)
+![weekly external link check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml/badge.svg?on=schedule)
 
 #### Intentional Failure (for this repo only)
 
- ![monthly external link check](https://github.com/danielfdickinson/hugo-action-check-links/actions/workflows/monthly-external-link-check.yml/badge.svg?on=schedule)
-
+ ![monthly external link check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/monthly-external-link-check.yml/badge.svg?on=schedule)
 
 ## Details
 
@@ -86,7 +84,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/hugo-action-build-audit@v0.1.1
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -96,8 +94,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Run hugo-action-check-links
-        uses: danielfdickinson/hugo-action-check-links@v0.1.8
+      - name: Run DFD Hugo Check Links
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.1.0
         with:
           canonical-root: https://www.example.com/
 ```
@@ -115,7 +113,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/hugo-action-build-audit@v0.1.1
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -125,8 +123,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Run hugo-action-check-links
-        uses: danielfdickinson/hugo-action-check-links@v0.1.8
+      - name: Run DFD Hugo Check Links
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.1.0
         with:
           canonical-root: https://www.example.com/
           check-external: true
@@ -145,7 +143,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/hugo-action-build-audit@v0.1.1
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -155,8 +153,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Run hugo-action-check-links
-        uses: danielfdickinson/hugo-action-check-links@v0.1.8
+      - name: Run DFD Hugo Check Links
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.1.0
         with:
           canonical-root: https://www.example.com/
           check-external: true
