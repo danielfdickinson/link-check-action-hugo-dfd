@@ -1,0 +1,112 @@
+name: "Hugo Check Links"
+author: "Daniel F. Dickinson"
+description: "Check links on a Hugo site"
+branding:
+  color: blue
+  icon: link
+inputs:
+  canonical-root:
+    description: "Canonical root of site (e.g. baseURL)"
+    required: true
+  check-external:
+    description: "Check external links as well as internal"
+    required: false
+  check-external-strict:
+    description: "Fail on 301 redirect instead of just warning"
+    required: false
+  download-site-as:
+    description: "Artifact containing the Hugo site"
+    required: true
+    default: unminified-site
+  download-site-filename:
+    description: "Filename for tarball of site to download to artifact"
+    required: true
+    default: hugo-site.tar
+  output-directory:
+    description: "Location of output site"
+    required: true
+    default: "public"
+  upload-logs-as:
+    description: "Upload logs as an artifact"
+    required: false
+  upload-logs-retention:
+    description: "Retention period for logs uploaded as an artifact"
+    required: false
+runs:
+  # TODO: #18 Convert to JavaScript Runner
+  using: "composite"
+  steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: ${{ inputs.download-site-as }}
+    - name: "Extract site and configs"
+      shell: bash
+      run: tar -xf hugo-site.tar
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+    - run: |
+        echo "::group::npm install output"; \
+        if test -e package.json -o -e package-lock.json; then npm install; fi; \
+        echo "::endgroup::npm install output"; \
+      shell: bash
+    - name: "Check internal links"
+      shell: bash
+      env:
+        CANONICAL_ROOT: ${{ inputs.canonical-root }}
+        CHECK_EXTERNAL: ${{ inputs.check-external }}
+        CHECK_EXTERNAL_STRICT: ${{ inputs.check-external-strict }}
+        OUTPUT_DIRECTORY: ${{ inputs.output-directory }}
+      run: |
+        { rm -f ok.log; \
+        rm -f todo.log; \
+        rm -f errors.log; \
+        mkfifo ok-links; \
+        mkfifo todo-links; \
+        mkfifo full-output; \
+        { cat full-output >full.log & }; \
+        { cat ok-links | grep '^ *ok ' >ok.log & }; \
+        { cat todo-links | sed -e '/# *TODO/,/^  \.\.\./p
+        d' >todo.log & }; \
+        set -o pipefail; \
+        if test "${CHECK_EXTERNAL}" = "true"; then INTERNAL= ; else INTERNAL="--internal"; fi ; \
+        if test "${CHECK_EXTERNAL_STRICT}" = "true"; then TODOS= ; else TODOS="true"; fi ; \
+        echo "::group::not ok links"; \
+        npx hyperlink ${OUTPUT_DIRECTORY}/sitemap.xml \
+        --canonicalroot ${CANONICAL_ROOT} \
+        ${INTERNAL} \
+        --skip "https://www.facebook.com/sharer.php" \
+        --skip "https://www.linkedin.com/shareArticle" \
+        --skip "https://linkedin.com/shareArticle" \
+        --skip "https://twitter.com/share" \
+        --skip "https://www.pexels.com" \
+        --skip "https://pixabay.com" \
+        --skip "http://doi.org/" \
+        --skip "https://doi.org/" \
+        --skip "https://www.nature.com/" \
+        --skip "https://arxiv.org/" \
+        --skip "example.com" \
+        --skip "example.net" \
+        ${TODOS:+--todo "301 http" --todo "fragment-redirect"} \
+        -r -p ${OUTPUT_DIRECTORY}/sitemap.xml | tee full-output | tee ok-links | tee todo-links | { grep -Ev "(^\#|^ *ok |^1\.\.|^TAP version|^\s*$)" || true; } | tee error.log ; \
+        echo "::endgroup::not ok links"; \
+        sleep 1; \
+        sync; \
+        if test -s todo.log; then echo '::warning:: Permanent redirects exist for some links; this is not fatal but links should be updated to the new location'; fi; \
+        echo "::group::todo links"; cat todo.log; echo "::endgroup::todo links"; \
+        echo "::group::ok links"; cat ok.log; echo "::endgroup::ok links"; \
+        } 2>&1 | tee run-output.log
+    - name: Upload logs
+      if: failure() && inputs.upload-logs-as
+      uses: actions/upload-artifact@v2
+      with:
+        name: ${{ inputs.upload-logs-as }}
+        path: |
+          ok.log
+          todo.log
+          error.log
+          full.log
+          run-output.log
+        if-no-files-found: error
+        retention-days: ${{ inputs.upload-logs-retention }}

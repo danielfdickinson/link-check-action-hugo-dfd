@@ -1,0 +1,27 @@
+name: weekly-external-link-check
+on:
+  schedule:
+    # At 5:35 AM -0500 on Thursday, check all external links
+    - cron: '35 10 * * 4'
+jobs:
+  build-unminified-site:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: "Build Site with Hugo and Audit"
+        uses: danielfdickinson/hugo-action-build-audit@v0.1.1
+        with:
+          source-directory: src
+          upload-site-as: unminified-site
+          use-lfs: false
+  check-external-links:
+    needs: build-unminified-site
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run hugo-action-check-links
+        uses: ./
+        with:
+          canonical-root: https://www.example.com/
+          check-external: true
+          upload-logs-as: test-logs
+          upload-logs-retention: 3

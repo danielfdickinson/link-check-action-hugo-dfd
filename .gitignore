@@ -1,0 +1,8 @@
+/public/
+/resources/
+node_modules
+check-links.log
+.hugo_build.lock
+html-validate.log
+/src/public
+/src/resources
