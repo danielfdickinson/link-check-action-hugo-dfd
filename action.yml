@@ -18,6 +18,10 @@ inputs:
     description: "Artifact containing the Hugo site"
     required: true
     default: unminified-site
+  entry-point:
+    description: File with which to start crawling (default /sitemap.xml)
+    required: true
+    default: sitemap.xml
   download-site-filename:
     description: "Filename for tarball of site to download to artifact"
     required: true
@@ -61,6 +65,7 @@ runs:
         CANONICAL_ROOT: ${{ inputs.canonical-root }}
         CHECK_EXTERNAL: ${{ inputs.check-external }}
         CHECK_EXTERNAL_STRICT: ${{ inputs.check-external-strict }}
+        ENTRY_POINT: ${{ inputs.entry-point }}
         OUTPUT_DIRECTORY: ${{ inputs.output-directory }}
         SKIP_CHECK_PATTERNS: ${{ inputs.skip-check-patterns }}
       run: |
@@ -79,12 +84,12 @@ runs:
         if test "${CHECK_EXTERNAL_STRICT}" = "true"; then TODOS= ; else TODOS="true"; fi ; \
         echo "::group::not ok links"; \
         SKIPS=""; for skip in ${SKIP_CHECK_PATTERNS}; do SKIPS="${SKIPS}${SKIPS:+ }--skip \"${skip}\""; done ; \
-        npx hyperlink ${OUTPUT_DIRECTORY}/sitemap.xml \
+        npx hyperlink ${OUTPUT_DIRECTORY}/${ENTRY_POINT} \
         --canonicalroot ${CANONICAL_ROOT} \
         ${INTERNAL} \
         ${SKIPS} \
         ${TODOS:+--todo "301 http" --todo "fragment-redirect"} \
-        -r -p ${OUTPUT_DIRECTORY}/sitemap.xml | tee full-output | tee ok-links | tee todo-links | { grep -Ev "(^\#|^ *ok |^1\.\.|^TAP version|^\s*$)" || true; } | tee error.log ; \
+        -r -p ${OUTPUT_DIRECTORY}/${ENTRY_POINT} | tee full-output | tee ok-links | tee todo-links | { grep -Ev "(^\#|^ *ok |^1\.\.|^TAP version|^\s*$)" || true; } | tee error.log ; \
         echo "::endgroup::not ok links"; \
         sleep 1; \
         sync; \
