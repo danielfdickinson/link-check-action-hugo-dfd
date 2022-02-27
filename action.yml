@@ -44,12 +44,18 @@ runs:
   # TODO: #18 Convert to JavaScript Runner
   using: "composite"
   steps:
+    - uses: actions/checkout@v2
+      with:
+        repository: danielfdickinson/link-check-action-hugo-dfd
+        path: link-check
     - uses: actions/download-artifact@v2
       with:
         name: ${{ inputs.download-site-as }}
+        path: ${{ github.workspace }}/link-check
     - name: "Extract site and configs"
       shell: bash
       run: tar -xf hugo-site.tar
+      working-directory: ${{ github.workspace }}/link-check
     - uses: actions/setup-node@v2
       with:
         node-version: '16'
@@ -59,6 +65,7 @@ runs:
         if test -e package.json -o -e package-lock.json; then npm install; fi; \
         echo "::endgroup::npm install output"; \
       shell: bash
+      working-directory: ${{ github.workspace }}/link-check
     - name: "Check internal links"
       shell: bash
       env:
@@ -97,16 +104,12 @@ runs:
         echo "::group::todo links"; cat todo.log; echo "::endgroup::todo links"; \
         echo "::group::ok links"; cat ok.log; echo "::endgroup::ok links"; \
         } 2>&1 | tee run-output.log
+      working-directory: ${{ github.workspace }}/link-check
     - name: Upload logs
       if: failure() && inputs.upload-logs-as
       uses: actions/upload-artifact@v2
       with:
         name: ${{ inputs.upload-logs-as }}
-        path: |
-          ok.log
-          todo.log
-          error.log
-          full.log
-          run-output.log
+        path: ${{ github.workspace }}/link-check/*.log
         if-no-files-found: error
         retention-days: ${{ inputs.upload-logs-retention }}
