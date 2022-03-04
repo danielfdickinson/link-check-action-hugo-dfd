@@ -1,4 +1,5 @@
 # DFD Hugo Check Links GitHub Action
+
 GitHub Action to check links (internal-only or optionally all links) for a Hugo site
 
 ## Status
@@ -16,8 +17,6 @@ GitHub Action to check links (internal-only or optionally all links) for a Hugo 
  ![monthly external link check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/monthly-external-link-check.yml/badge.svg?on=schedule)
 
 ## Details
-
-**NB**: Currently experimental and not for public consumption. Use at your own risk.
 
 ### Purpose
 
@@ -85,7 +84,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -96,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run DFD Hugo Check Links
-        uses: danielfdickinson/link-check-action-hugo-dfd@v0.1.0
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2.2
         with:
           canonical-root: https://www.example.com/
 ```
@@ -114,7 +113,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -125,7 +124,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run DFD Hugo Check Links
-        uses: danielfdickinson/link-check-action-hugo-dfd@v0.1.0
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2.2
         with:
           canonical-root: https://www.example.com/
           check-external: true
@@ -144,7 +143,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.0
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -155,7 +154,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run DFD Hugo Check Links
-        uses: danielfdickinson/link-check-action-hugo-dfd@v0.1.0
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2.2
         with:
           canonical-root: https://www.example.com/
           check-external: true
