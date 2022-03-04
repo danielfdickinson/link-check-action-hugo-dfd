@@ -10,7 +10,7 @@ jobs:
       - name: "Build Site with Hugo and Audit"
         uses: danielfdickinson/build-audit-action-hugo-dfd@v0.1.0
         with:
-          source-directory: src
+          source-directory: exampleSite
           upload-site-as: unminified-site
           use-lfs: false
   check-external-links:
