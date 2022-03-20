@@ -33,7 +33,7 @@ inputs:
   skip-check-patterns:
     description: "Space-separated list of patterns to skip (from error output)"
     required: true
-    default: "https://www.facebook.com/sharer.php https://www.linkedin.com/shareArticle  https://linkedin.com/shareArticle https://twitter.com/share https://www.pexels.com https://pixabay.com http://doi.org/ https://doi.org/ https://www.nature.com/ https://arxiv.org/ example.com example.net"
+    default: "https://www.facebook.com/ https://business.facebook.com/ https://www.linkedin.com/shareArticle  https://linkedin.com/shareArticle https://twitter.com/share https://www.pexels.com https://pixabay.com http://doi.org/ https://doi.org/ https://www.nature.com/ https://arxiv.org/ https://www.cbc.ca https://cbc.ca example.com example.net"
   upload-logs-as:
     description: "Upload logs as an artifact"
     required: false
