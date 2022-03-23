@@ -4,3 +4,4 @@ node_modules
 check-links.log
 .hugo_build.lock
 html-validate.log
+md-lint.log
