@@ -58,8 +58,9 @@ runs:
       working-directory: ${{ github.workspace }}/link-check
     - uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: 'lts/*'
         cache: 'npm'
+        cache-dependency-path: link-check/package-lock.json
     - run: |
         echo "::group::npm install output"; \
         if test -e package.json -o -e package-lock.json; then npm install; fi; \
