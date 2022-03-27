@@ -58,7 +58,7 @@ runs:
       working-directory: ${{ github.workspace }}/link-check
     - uses: actions/setup-node@v2
       with:
-        node-version: 'lts/*'
+        node-version: 'lts/gallium' # We do this to avoid unexpected behaviour
         cache: 'npm'
         cache-dependency-path: link-check/package-lock.json
     - run: |
