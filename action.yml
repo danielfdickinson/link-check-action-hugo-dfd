@@ -44,11 +44,11 @@ runs:
   # TODO: #18 Convert to JavaScript Runner
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         repository: danielfdickinson/link-check-action-hugo-dfd
         path: link-check
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: ${{ inputs.download-site-as }}
         path: ${{ github.workspace }}/link-check
@@ -56,7 +56,7 @@ runs:
       shell: bash
       run: tar -xf hugo-site.tar
       working-directory: ${{ github.workspace }}/link-check
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@v3
       with:
         node-version: 'lts/gallium' # We do this to avoid unexpected behaviour
         cache: 'npm'
@@ -108,7 +108,7 @@ runs:
       working-directory: ${{ github.workspace }}/link-check
     - name: Upload logs
       if: failure() && inputs.upload-logs-as
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: ${{ inputs.upload-logs-as }}
         path: ${{ github.workspace }}/link-check/*.log
