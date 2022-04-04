@@ -8,14 +8,11 @@ on:
       - reopened
     branches:
       - main
-      - 'release**'
-      - 'staging**'
+      - 'v[0-9]*'
   push:
     branches:
-      - 'feature**'
       - main
-      - 'release**'
-      - 'staging**'
+      - 'v[0-9]*'
 jobs:
   check-source-code-validity:
     runs-on: ubuntu-20.04
