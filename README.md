@@ -80,7 +80,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.0
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -89,9 +89,9 @@ jobs:
     needs: build-unminified-site
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run DFD Hugo Check Links
-        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2.2
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2
         with:
           canonical-root: https://www.example.com/
 ```
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.0
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -118,9 +118,9 @@ jobs:
     needs: build-unminified-site
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run DFD Hugo Check Links
-        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2.2
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2
         with:
           canonical-root: https://www.example.com/
           check-external: true
@@ -139,7 +139,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.0
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2
         with:
           source-directory: src
           upload-site-as: unminified-site
@@ -148,9 +148,9 @@ jobs:
     needs: build-unminified-site
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run DFD Hugo Check Links
-        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2.2
+        uses: danielfdickinson/link-check-action-hugo-dfd@v0.2
         with:
           canonical-root: https://www.example.com/
           check-external: true
