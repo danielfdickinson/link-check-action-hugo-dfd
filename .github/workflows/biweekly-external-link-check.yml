@@ -3,6 +3,10 @@ on:
   schedule:
     # At 6:05 AM -0500, every two weeks strictly check all external links (301 Moved is a failure not just a warning)
     - cron: '05 11 */14 * *'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
   build-unminified-site:
     runs-on: ubuntu-20.04
