@@ -17,7 +17,7 @@ jobs:
     needs: build-unminified-site
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Run DFD Hugo Check Links
         uses: ./
         with:
