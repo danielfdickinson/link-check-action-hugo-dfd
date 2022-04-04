@@ -6,11 +6,15 @@ GitHub Action to check links (internal-only or optionally all links) for a Hugo 
 
 ### Pushes to main & Weekly scheduled external link check
 
-[![test check-links](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml) [![weekly external link check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml/badge.svg?on=schedule)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml)
+[![test-check-links](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml) [![weekly-external-link-check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml)
 
 #### Intentional failure (for this repo only)
 
-[![biweekly external link check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/biweekly-external-link-check.yml/badge.svg?on=schedule)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/biweekly-external-link-check.yml)
+[![biweekly-external-link-check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/biweekly-external-link-check.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/biweekly-external-link-check.yml)
+
+## GitHub repository
+
+<https://github.com/danielfdickinson/link-check-action-hugo>
 
 ## Details
 
@@ -69,12 +73,6 @@ on:
       - 'feature**'
       - main
       - 'staging**'
-    paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - '.gitignore'
-      - '.vscode'
-      - 'scripts'
 jobs:
   build-unminified-site:
     runs-on: ubuntu-20.04
