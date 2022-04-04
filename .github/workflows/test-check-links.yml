@@ -6,17 +6,16 @@ on:
       - opened
       - synchronize
       - reopened
+    branches:
+      - main
+      - 'release**'
+      - 'staging**'
   push:
     branches:
       - 'feature**'
       - main
+      - 'release**'
       - 'staging**'
-    paths-ignore:
-      - 'README.md'
-      - 'LICENSE'
-      - '.gitignore'
-      - '.vscode'
-      - 'scripts'
 jobs:
   check-source-code-validity:
     runs-on: ubuntu-20.04
