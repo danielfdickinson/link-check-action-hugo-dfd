@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: "Build Site with Hugo and Audit"
-        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2.1-beta.1
+        uses: danielfdickinson/build-audit-action-hugo-dfd@v0.2
         with:
           source-directory: exampleSite
           upload-site-as: unminified-site
