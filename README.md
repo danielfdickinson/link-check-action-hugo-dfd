@@ -8,10 +8,6 @@ GitHub Action to check links (internal-only or optionally all links) for a Hugo 
 
 [![test-check-links](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml) [![weekly-external-link-check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/weekly-external-link-check.yml)
 
-#### Intentional failure (for this repo only)
-
-[![biweekly-external-link-check](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/biweekly-external-link-check.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/biweekly-external-link-check.yml)
-
 ## GitHub repository
 
 <https://github.com/danielfdickinson/link-check-action-hugo>
