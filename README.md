@@ -4,7 +4,6 @@ GitHub Action to check links (internal-only or optionally all links) for a Hugo 
 
 ## Status
 
-
 [![test-check-links](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml/badge.svg)](https://github.com/danielfdickinson/link-check-action-hugo-dfd/actions/workflows/test-check-links.yml)
 
 ## GitHub repository
