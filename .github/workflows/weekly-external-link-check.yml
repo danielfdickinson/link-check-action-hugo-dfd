@@ -1,8 +1,8 @@
 name: weekly-external-link-check
 on:
-  schedule:
-    # At 5:35 AM -0500 on Thursday, check all external links
-    - cron: '35 10 * * 4'
+  #schedule:
+  #   At 5:35 AM -0500 on Thursday, check all external links
+  #   - cron: '35 10 * * 4'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
